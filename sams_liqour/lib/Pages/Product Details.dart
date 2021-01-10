@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sams_liqour/Components/OthersBought.dart';
 import 'package:sams_liqour/Components/Quantity.dart';
 import 'package:sams_liqour/main.dart';
+import 'package:sams_liqour/Pages/Shopping Cart.dart';
 
 class ProductDetails extends StatefulWidget {
   final productDetailName;
@@ -49,7 +50,14 @@ class _ProductDetailsState extends State<ProductDetails> {
               icon: Icon(Icons.search, color: Colors.white), onPressed: null),
           IconButton(
               icon: Icon(Icons.shopping_bag, color: Colors.white),
-              onPressed: null)
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Cart(),
+                  ),
+                );
+              })
         ],
       ),
 

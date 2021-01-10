@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:sams_liqour/Components/Horizontal List.dart';
 import 'package:sams_liqour/Components/Products.dart';
+import 'package:sams_liqour/Pages/Shopping Cart.dart';
 
 //The main function is the starting point for all our flutter apps
 void main() {
@@ -67,7 +68,14 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.search, color: Colors.white), onPressed: null),
           IconButton(
               icon: Icon(Icons.shopping_bag, color: Colors.white),
-              onPressed: null)
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Cart(),
+                  ),
+                );
+              })
         ],
       ),
       drawer: Drawer(
