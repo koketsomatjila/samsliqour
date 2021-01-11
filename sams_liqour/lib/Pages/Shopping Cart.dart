@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sams_liqour/main.dart';
+import 'package:sams_liqour/Components/Cart Products.dart';
 
 class Cart extends StatefulWidget {
   @override
@@ -41,27 +42,72 @@ class _CartState extends State<Cart> {
               onPressed: null)
         ],
       ),
-      bottomNavigationBar: Container(
-        color: Colors.white,
-        child: Row(
-          children: [
-            Expanded(
-              child: ListTile(
-                title: Text("Total:"),
-                subtitle: Text("R550"),
-              ),
-            ),
-            Expanded(
-              child: MaterialButton(
-                onPressed: () {},
-                child: Text(
-                  "Checkout",
-                  style: TextStyle(color: Colors.white),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Container(
+              child: Text(
+                'Your Shopping Cart',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey[800],
                 ),
-                color: Colors.grey[800],
+                textAlign: TextAlign.center,
               ),
+              width: 300,
+              height: 50,
             ),
-          ],
+          ),
+          Container(
+            width: 1000,
+            height: 371,
+            child: CartProducts(),
+          ),
+        ],
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          color: Colors.white,
+          child: Row(
+            children: [
+              Expanded(
+                child: ListTile(
+                  title: Text(
+                    "Total:",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey[800],
+                    ),
+                  ),
+                  subtitle: Text(
+                    "R550",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: MaterialButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Checkout",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    color: Colors.grey[800],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
