@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "669604377516",
+    "project_id": "sams-liquor",
+    "storage_bucket": "sams-liquor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669604377516:android:2d7ce3309b21316d3f4009",
+        "android_client_info": {
+          "package_name": "com.selopetrading.sams_liqour"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "669604377516-s9jnd91agqvemtsgkatqojosbisdqfq8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.selopetrading.sams_liqour",
+            "certificate_hash": "8a11302a9bccae6fcadbd648519d3c9b7aaa7a85"
+          }
+        },
+        {
+          "client_id": "669604377516-lhftrc5d0corea0brdq9lnpppf19g7i3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQJ06FdcdtEfZ1abSdYHcekc7ujxABwxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "669604377516-lhftrc5d0corea0brdq9lnpppf19g7i3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

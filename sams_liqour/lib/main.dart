@@ -22,9 +22,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Widget imageCarousel = Container(
-      height: 230.0,
+      height: 150.0,
       child: Carousel(
-        boxFit: BoxFit.fitHeight,
+        boxFit: BoxFit.contain,
         images: [
           AssetImage('images/carousel/Spirits.png'),
           AssetImage('images/carousel/Wines.png'),
@@ -155,35 +155,32 @@ class _HomePageState extends State<HomePage> {
 
       // body
 
-      body: Container(
-        color: Colors.white54,
-        child: ListView(
-          children: [
-            imageCarousel,
-            Padding(
-              padding: EdgeInsets.all(12),
-              child: Text('Categories'),
-            ),
+      body: Column(
+        children: [
+          imageCarousel,
+          Padding(
+            padding: EdgeInsets.only(top: 15, bottom: 20),
+            child: Text('Categories'),
+          ),
 
-            //horizontal list starts here
+          //horizontal list starts here
 
-            HorizontalList(),
+          HorizontalList(),
 
-            //padding
+          //padding
 
-            Padding(
-              padding: EdgeInsets.only(top: 12, left: 12, bottom: 15),
-              child: Text('Popular Items'),
-            ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 15),
+            child: Text('Popular Items'),
+          ),
 
-            //popular items grid
+          //popular items grid
 
-            Container(
-              height: 420,
-              child: Products(),
-            )
-          ],
-        ),
+          Container(
+            height: 200,
+            child: Products(),
+          ),
+        ],
       ),
     );
   }

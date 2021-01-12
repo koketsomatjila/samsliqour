@@ -3,15 +3,11 @@ import 'package:flutter/material.dart';
 class HorizontalList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-      height: 150, 
-      width: 15,
+    return Flexible(
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          
-          Category( 
+          Category(
               imageLocation: 'images/categories/beers.png',
               imageCaption: '\nBeers & Ciders'),
           Category(
@@ -22,7 +18,7 @@ class HorizontalList extends StatelessWidget {
               imageCaption: '\nWines'),
           Category(
               imageLocation: 'images/categories/juice.png',
-              imageCaption: '\nSoft Drinks & Juices'),
+              imageCaption: '\nSoft Drinks'),
         ],
       ),
     );
@@ -41,15 +37,14 @@ class Category extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(3),
+      padding: EdgeInsets.all(1),
       child: InkWell(
         onTap: () {},
         child: Container(
-          width: 100,
+          width: 130,
           child: ListTile(
-            title: Image.asset(imageLocation, width: 100, height: 70),
+            title: Image.asset(imageLocation, width: 50, height: 50),
             subtitle: Container(
-              width: 10,
               alignment: Alignment.topCenter,
               child: Text(imageCaption),
             ),
