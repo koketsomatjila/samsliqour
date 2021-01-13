@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidGradleBuildConfiguration">
+    <option name="SYNC_PROJECT_BEFORE_BUILD" value="true" />
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a38d7f96-e774-48b6-9b42-b05bf02fb8dc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/Sams Liquor.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sams_liqour/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/sams_liqour/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sams_liqour/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/sams_liqour/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sams_liqour/android/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sams_liqour/android/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sams_liqour/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sams_liqour/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sams_liqour/lib/Pages/Product Details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sams_liqour/lib/Pages/Product Details.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sams_liqour/lib/Pages/Shopping Cart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sams_liqour/lib/Pages/Shopping Cart.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sams_liqour/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sams_liqour/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sams_liqour/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/sams_liqour/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sams_liqour/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/sams_liqour/pubspec.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1mzLfyelMIW4hhKNUcVOPZRQvrN" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../" />
+    <property name="settings.editor.selected.configurable" value="gradle.compiler" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="Sams Liquor" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a38d7f96-e774-48b6-9b42-b05bf02fb8dc" name="Default Changelist" comment="" />
+      <created>1610491579897</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1610491579897</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="361" y="53" key="#Plugins" timestamp="1610491834156">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="53" key="#Plugins/0.0.1536.824/0.-1080.1920.1040@0.0.1536.824" timestamp="1610491834156" />
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1610493337015">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/0.-1080.1920.1040@0.0.1536.824" timestamp="1610493337015" />
+    <state x="168" y="120" width="1200" height="584" key="AVDManager" timestamp="1610493569798">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="168" y="120" width="1200" height="584" key="AVDManager/0.0.1536.824/0.-1080.1920.1040@0.0.1536.824" timestamp="1610493569798" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1610496629482">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/0.-1080.1920.1040@0.0.1536.824" timestamp="1610496629482" />
+    <state width="1340" height="153" key="GridCell.Tab.0.bottom" timestamp="1610492303477">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1340" height="153" key="GridCell.Tab.0.bottom/0.0.1536.824/0.-1080.1920.1040@0.0.1536.824" timestamp="1610492303477" />
+    <state width="1340" height="153" key="GridCell.Tab.0.center" timestamp="1610492303477">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1340" height="153" key="GridCell.Tab.0.center/0.0.1536.824/0.-1080.1920.1040@0.0.1536.824" timestamp="1610492303477" />
+    <state width="1340" height="153" key="GridCell.Tab.0.left" timestamp="1610492303477">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1340" height="153" key="GridCell.Tab.0.left/0.0.1536.824/0.-1080.1920.1040@0.0.1536.824" timestamp="1610492303477" />
+    <state width="1340" height="153" key="GridCell.Tab.0.right" timestamp="1610492303477">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1340" height="153" key="GridCell.Tab.0.right/0.0.1536.824/0.-1080.1920.1040@0.0.1536.824" timestamp="1610492303477" />
+    <state x="349" y="155" key="IDE.errors.dialog" timestamp="1610493028397">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="349" y="155" key="IDE.errors.dialog/0.0.1536.824/0.-1080.1920.1040@0.0.1536.824" timestamp="1610493028397" />
+    <state x="277" y="57" key="SettingsEditor" timestamp="1610496786502">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824/0.-1080.1920.1040@0.0.1536.824" timestamp="1610496786502" />
+    <state x="426" y="189" key="run.anything.popup" timestamp="1610492915678">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="426" y="189" key="run.anything.popup/0.0.1536.824/0.-1080.1920.1040@0.0.1536.824" timestamp="1610492915678" />
+  </component>
+</project>
