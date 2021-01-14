@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import './Pages/Login.dart';
+import './Pages/Sign In.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: Login(),
+    home: SignIn(),
   ));
 }
