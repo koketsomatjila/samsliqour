@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         toolbarHeight: 130,
         flexibleSpace: Image(
-          image: AssetImage('images/sams logo.JPG'),
+          image: AssetImage('images/sams logo.jpg'),
           fit: BoxFit.fitWidth,
         ),
         title: InkWell(
