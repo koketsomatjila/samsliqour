@@ -7,6 +7,9 @@ import 'package:sams_liqour/Pages/Home.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
+final _formKey = GlobalKey<FormState>();
+TextEditingController _emailTextController = TextEditingController();
+TextEditingController _passwordTextController = TextEditingController();
 
 Future<String> signInWithGoogle() async {
   await Firebase.initializeApp();
@@ -29,6 +32,8 @@ Future<String> signInWithGoogle() async {
 
     final User currentUser = _auth.currentUser;
     assert(user.uid == currentUser.uid);
+    assert(user.photoURL == currentUser.photoURL);
+    assert(user.displayName == currentUser.displayName);
 
     print('signInWithGoogle succeeded: $user');
 
@@ -55,26 +60,140 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         toolbarHeight: 130,
         flexibleSpace: Image(
-          image: AssetImage('images/sams logo.jpg'),
+          color: Colors.deepOrange.withOpacity(0.1),
+          colorBlendMode: BlendMode.darken,
+          image: AssetImage(
+            'images/sams logo.jpg',
+          ),
           fit: BoxFit.fitWidth,
         ),
       ),
       body: Stack(
         children: [
           Image.asset('images/bar2.jpg',
-              fit: BoxFit.fitHeight,
+              fit: BoxFit.cover,
               height: double.infinity,
-              color: Colors.black.withOpacity(0.5),
+              width: double.infinity,
+              color: Colors.deepOrange.withOpacity(0.9),
               colorBlendMode: BlendMode.darken),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 88.0),
-            child:
-                Container(alignment: Alignment.center, child: _signInButton()),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 38.0),
-            child: Container(
-                alignment: Alignment.center, child: _facebookSignInButton()),
+          Container(
+            alignment: Alignment.center,
+            child: Flexible(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 70.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      // Padding(
+                      //   padding: const EdgeInsets.only(bottom: 8.0),
+                      //   child: Container(
+                      //       alignment: Alignment.center, child: Text("Log In")),
+                      // ),
+
+                      //email field
+
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white.withOpacity(0.5),
+                          elevation: 0.3,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextFormField(
+                                decoration: InputDecoration(
+                                    hintText: ("Enter E-mail"),
+                                    icon: Icon(Icons.email),
+                                    labelText: "Email *"),
+                                keyboardType: TextInputType.emailAddress,
+                                controller: _emailTextController,
+                                // ignore: missing_return
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    Pattern pattern =
+                                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                    RegExp regex = new RegExp(pattern);
+                                    if (!regex.hasMatch(value))
+                                      return "Invalid Email";
+                                    else
+                                      return null;
+                                  }
+                                }),
+                          ),
+                        ),
+                      ),
+
+                      //password field
+
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white.withOpacity(0.5),
+                          elevation: 0.3,
+                          child: Padding(
+                            padding: const EdgeInsets.all(1.0),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                  hintText: ("Enter Password"),
+                                  icon: Icon(Icons.lock_rounded),
+                                  labelText: "Password *"),
+                              keyboardType: TextInputType.visiblePassword,
+                              controller: _passwordTextController,
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Password field can't be empty";
+                                } else if (value.length < 6) {
+                                  return "Password needs to be atleast 6 characters long";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 8, bottom: 38.0, left: 8, right: 8),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(40),
+                          color: Colors.blue[800],
+                          elevation: 0.3,
+                          child: MaterialButton(
+                            onPressed: () {},
+                            minWidth: MediaQuery.of(context).size.width,
+                            child: Text(
+                              "Log In",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Divider(),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 8, right: 8, top: 38.0),
+                        child: Container(
+                            alignment: Alignment.bottomCenter,
+                            child: _signInButton()),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 8, right: 8, top: 8.0),
+                        child: Container(
+                            alignment: Alignment.bottomCenter,
+                            child: _facebookSignInButton()),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -83,7 +202,8 @@ class _SignInState extends State<SignIn> {
 
   Widget _signInButton() {
     return FlatButton(
-      color: Colors.red.withOpacity(0.85),
+      minWidth: MediaQuery.of(context).size.width,
+      color: Colors.red[900],
       splashColor: Colors.grey,
       onPressed: () {
         signInWithGoogle().then((result) {
@@ -100,12 +220,12 @@ class _SignInState extends State<SignIn> {
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(26, 10, 26, 10),
+        padding: const EdgeInsets.fromLTRB(35, 10, 35, 10),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(image: AssetImage("images/google logo.png"), height: 35.0),
+            Image(image: AssetImage("images/google logo.png"), height: 25.0),
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
@@ -124,7 +244,8 @@ class _SignInState extends State<SignIn> {
 
   Widget _facebookSignInButton() {
     return FlatButton(
-      color: Colors.red.withOpacity(0.85),
+      minWidth: MediaQuery.of(context).size.width,
+      color: Colors.red[900],
       splashColor: Colors.grey,
       onPressed: () {
         // TODO
@@ -147,7 +268,7 @@ class _SignInState extends State<SignIn> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(image: AssetImage("images/facebook.png"), height: 35.0),
+            Image(image: AssetImage("images/facebook.png"), height: 25.0),
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
