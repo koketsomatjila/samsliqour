@@ -15,9 +15,9 @@ dependencies:
   cupertino_icons: ^1.0.0
   firebase_auth: ^0.20.0+1
   firebase_core: ^0.7.0
+  firebase_database: ^6.0.0
   fluttertoast: ^7.1.6
   google_sign_in: ^3.2.4
-  
   shared_preferences: ^0.5.10
 
 dev_dependencies:

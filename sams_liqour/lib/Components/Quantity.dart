@@ -32,7 +32,6 @@ class _QuantityState extends State<Quantity> {
               child: Row(
                 children: [
                   Expanded(
-                    flex: 1,
                     child: TextFormField(
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(

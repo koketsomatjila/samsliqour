@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import './Pages/Sign In.dart';
+import 'package:sams_liqour/Pages/Log%20In.dart';
+import './Pages/Log In.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(MaterialApp(
-    home: SignIn(),
+    home: LogIn(),
   ));
 }
