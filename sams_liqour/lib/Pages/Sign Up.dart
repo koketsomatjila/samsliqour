@@ -286,7 +286,7 @@ class _SignUpState extends State<SignUp> {
                 password: _passwordTextController.text)
             .then((user) => {
                   _userServices.createUser(user.user.uid.toString(), {
-                    "username": user.user.displayName,
+                    "username": _nameTextController.text,
                     "email": user.user.email,
                     "userId": user.user.uid,
                   })
