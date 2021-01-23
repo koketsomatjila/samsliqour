@@ -162,6 +162,7 @@ class _LogInState extends State<LogIn> {
                                       if (!await user.signIn(
                                           _emailTextController.text,
                                           _passwordTextController.text))
+                                        // ignore: deprecated_member_use
                                         _key.currentState.showSnackBar(SnackBar(
                                             content: Text('Signed In Failed')));
                                     }

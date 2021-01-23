@@ -234,6 +234,7 @@ class _SignUpState extends State<SignUp> {
                                           _nameTextController.text,
                                           _emailTextController.text,
                                           _passwordTextController.text))
+                                        // ignore: deprecated_member_use
                                         _key.currentState.showSnackBar(SnackBar(
                                             content: Text('Signed Up Failed')));
                                     }
