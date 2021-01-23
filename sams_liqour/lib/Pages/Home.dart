@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:provider/provider.dart';
 import 'package:sams_liqour/Components/Horizontal List.dart';
 import 'package:sams_liqour/Components/Products.dart';
 import 'package:sams_liqour/Pages/Shopping Cart.dart';
+import 'package:sams_liqour/Provider/User%20Provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,6 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context);
     Widget imageCarousel = Container(
       height: 150.0,
       child: Carousel(
@@ -137,6 +140,17 @@ class _HomePageState extends State<HomePage> {
                 title: Text('About'),
                 leading: Icon(
                   Icons.help_rounded,
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                user.signOut();
+              },
+              child: ListTile(
+                title: Text('Log Out'),
+                leading: Icon(
+                  Icons.exit_to_app,
                 ),
               ),
             ),
