@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:provider/provider.dart';
 import 'package:sams_liqour/Components/Horizontal List.dart';
-import 'package:sams_liqour/Components/Products.dart';
+import 'package:sams_liqour/Components/Popular%20Products.dart';
+// import 'package:sams_liqour/Components/Products.dart';
 import 'package:sams_liqour/Pages/Shopping Cart.dart';
+import 'package:sams_liqour/Provider/Product%20Provider.dart';
 import 'package:sams_liqour/Provider/User%20Provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,9 +14,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final key = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
+    final productProvider = Provider.of<ProductProvider>(context);
+
     Widget imageCarousel = Container(
       height: 150.0,
       child: Carousel(
@@ -34,6 +40,7 @@ class _HomePageState extends State<HomePage> {
     );
 
     return Scaffold(
+      key: key,
       appBar: AppBar(
         toolbarHeight: 130,
         flexibleSpace: Image(
@@ -145,7 +152,7 @@ class _HomePageState extends State<HomePage> {
             ),
             InkWell(
               onTap: () {
-                user.signOut();
+                userProvider.signOut();
               },
               child: ListTile(
                 title: Text('Log Out'),
@@ -181,10 +188,14 @@ class _HomePageState extends State<HomePage> {
 
           //popular items grid
 
-          Container(
-            height: 200,
-            child: Products(),
-          ),
+          Column(
+              children: productProvider.products
+                  .map((item) => GestureDetector(
+                        child: ProductCard(
+                          product: item,
+                        ),
+                      ))
+                  .toList()),
         ],
       ),
     );

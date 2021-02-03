@@ -1,7 +1,9 @@
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sams_liqour/Database/Users.dart';
+import 'package:sams_liqour/Models/User.dart';
 
 enum Status { Uninitialised, Authenticated, Authenticating, Unauthenticated }
 
@@ -9,9 +11,12 @@ class UserProvider with ChangeNotifier {
   FirebaseAuth _auth;
   User _user;
   Status _status = Status.Uninitialised;
+  UserServices _userServices = UserServices();
+  UserModel _userModel;
+
   Status get status => _status;
   User get user => _user;
-  UserServices _userServices;
+  UserModel get userModel => _userModel;
 
   UserProvider.initialize() : _auth = FirebaseAuth.instance {
     _auth.authStateChanges().listen(_onStateChanged);
@@ -38,12 +43,12 @@ class UserProvider with ChangeNotifier {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((user) {
-        Map<String, dynamic> values = {
-          "Name": name,
-          "E-mail": email,
-          "userId": user.user.uid,
-        };
-        _userServices.createUser(values);
+        _userServices.createUser({
+          "name": name,
+          "email": email,
+          "uid": user.user.uid,
+          "stripeId": ''
+        });
       });
       return true;
     } catch (e) {
@@ -66,6 +71,7 @@ class UserProvider with ChangeNotifier {
       _status = Status.Unauthenticated;
     } else {
       _user = user;
+      _userModel = await _userServices.getUserById(user.uid);
       _status = Status.Authenticated;
     }
     notifyListeners();
