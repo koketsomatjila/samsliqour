@@ -5,8 +5,13 @@ class UserServices {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   String collection = "users";
 
-  void createUser(Map data) {
-    _firestore.collection(collection).doc(data["uid"]).set(data);
+  void createUser(Map<String, dynamic> data) {
+    String uid = data['uid'];
+    _firestore.collection(collection).doc(uid).set(data);
+  }
+
+  void updateUserData(Map<String, dynamic> data) {
+    _firestore.collection(collection).doc(data['id']).update(data);
   }
 
   Future<UserModel> getUserById(String uid) => _firestore

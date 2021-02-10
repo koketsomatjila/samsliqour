@@ -182,20 +182,23 @@ class _HomePageState extends State<HomePage> {
           //padding
 
           Padding(
-            padding: EdgeInsets.only(bottom: 15),
+            padding: EdgeInsets.only(top: 5, bottom: 15),
             child: Text('Popular Items'),
           ),
 
           //popular items grid
 
-          Column(
-              children: productProvider.products
-                  .map((item) => GestureDetector(
-                        child: ProductCard(
-                          product: item,
-                        ),
-                      ))
-                  .toList()),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(5, 1, 5, 50),
+            child: Column(
+                children: productProvider.products
+                    .map((item) => GestureDetector(
+                          child: ProductCard(
+                            product: item,
+                          ),
+                        ))
+                    .toList()),
+          ),
         ],
       ),
     );

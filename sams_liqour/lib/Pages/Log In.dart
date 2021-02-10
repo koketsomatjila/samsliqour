@@ -14,8 +14,6 @@ class LogIn extends StatefulWidget {
 class _LogInState extends State<LogIn> {
   final _formKey = GlobalKey<FormState>();
   final _key = GlobalKey<ScaffoldState>();
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _passwordTextController = TextEditingController();
   bool hidePass = true;
   void _toggle() {
     setState(() {
@@ -78,7 +76,7 @@ class _LogInState extends State<LogIn> {
                                       const EdgeInsets.fromLTRB(20, 1, 1, 1),
                                   child: TextFormField(
                                       keyboardType: TextInputType.emailAddress,
-                                      controller: _emailTextController,
+                                      controller: user.email,
                                       decoration: InputDecoration(
                                         hintText: ("Enter E-mail"),
                                         icon: Icon(Icons.email),
@@ -124,19 +122,19 @@ class _LogInState extends State<LogIn> {
                                             TextInputType.visiblePassword,
                                         obscureText: hidePass,
                                         obscuringCharacter: "*",
-                                        controller: _passwordTextController,
-                                        validator: (value) {
-                                          if (value.isEmpty) {
-                                            return "Password field can't be empty";
-                                          } else if (value.length < 6) {
-                                            return "Password needs to be atleast 6 characters long";
-                                          } else if (_passwordTextController
-                                                  .text !=
-                                              value) {
-                                            return "Incorrect password ";
-                                          }
-                                          return null;
-                                        },
+                                        controller: user.password,
+                                        // validator: (value) {
+                                        //   if (value.isEmpty) {
+                                        //     return "Password field can't be empty";
+                                        //   } else if (value.length < 6) {
+                                        //     return "Password needs to be atleast 6 characters long";
+                                        //   } else if (_passwordTextController
+                                        //           .text !=
+                                        //       value) {
+                                        //     return "Incorrect password ";
+                                        //   }
+                                        //   return null;
+                                        // },
                                       ),
                                       trailing: IconButton(
                                         icon: Icon(
@@ -159,9 +157,7 @@ class _LogInState extends State<LogIn> {
                                 child: MaterialButton(
                                   onPressed: () async {
                                     if (_formKey.currentState.validate()) {
-                                      if (!await user.signIn(
-                                          _emailTextController.text,
-                                          _passwordTextController.text))
+                                      if (!await user.signIn())
                                         // ignore: deprecated_member_use
                                         _key.currentState.showSnackBar(SnackBar(
                                             content: Text('Signed In Failed')));

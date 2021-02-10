@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductModel {
-  static const CATEGORY = 'category';
-  static const FEATURED = 'featured';
+  static const CATEGORY = 'Category';
+  static const FEATURED = 'Featured';
   static const ID = 'id';
-  static const NAME = 'name';
-  static const PICTURE = 'picture';
+  static const NAME = 'Name';
+  static const PICTURE = 'Picture';
   static const PRICE = 'price';
-  static const QUANTITY = 'quantity';
+  static const QUANTITY = 'Quantity';
   static const SALE = 'sale';
 
   String _category;

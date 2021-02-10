@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sams_liqour/Commons/Common.dart';
 import 'package:sams_liqour/Commons/Loading.dart';
+import 'package:sams_liqour/Pages/Home.dart';
 import 'package:sams_liqour/Pages/Log%20In.dart';
 import 'package:sams_liqour/Provider/User%20Provider.dart';
 
@@ -14,9 +16,6 @@ class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   final _key = GlobalKey<ScaffoldState>();
   // UserServices _userServices = UserServices();
-  TextEditingController _nameTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
   UserCredential displayName;
   Map value;
@@ -84,7 +83,7 @@ class _SignUpState extends State<SignUp> {
                                           border: InputBorder.none,
                                           labelText: "Name *"),
                                       keyboardType: TextInputType.name,
-                                      controller: _nameTextController,
+                                      controller: user.name,
                                       // ignore: missing_return
                                       validator: (value) {
                                         if (value.isEmpty) {
@@ -114,7 +113,7 @@ class _SignUpState extends State<SignUp> {
                                         border: InputBorder.none,
                                         labelText: "Email *"),
                                     keyboardType: TextInputType.emailAddress,
-                                    controller: _emailTextController,
+                                    controller: user.email,
                                     // ignore: missing_return
                                     validator: (value) {
                                       if (value.isEmpty) {
@@ -153,21 +152,21 @@ class _SignUpState extends State<SignUp> {
                                           border: InputBorder.none),
                                       keyboardType:
                                           TextInputType.visiblePassword,
-                                      controller: _passwordTextController,
+                                      controller: user.password,
                                       obscureText: hidePass,
                                       obscuringCharacter: '*',
-                                      validator: (value) {
-                                        if (value.isEmpty) {
-                                          return "Password field can't be empty";
-                                        } else if (value.length < 6) {
-                                          return "Password needs to be atleast 6 characters long";
-                                        } else if (_passwordTextController
-                                                .text !=
-                                            value) {
-                                          return "Incorrect password ";
-                                        }
-                                        return null;
-                                      },
+                                      // validator: (value) {
+                                      //   if (value.isEmpty) {
+                                      //     return "Password field can't be empty";
+                                      //   } else if (value.length < 6) {
+                                      //     return "Password needs to be atleast 6 characters long";
+                                      //   } else if (_passwordTextController
+                                      //           .text !=
+                                      //       value) {
+                                      //     return "Incorrect password ";
+                                      //   }
+                                      //   return null;
+                                      // },
                                     ),
                                     trailing: IconButton(
                                       icon: Icon(
@@ -203,15 +202,13 @@ class _SignUpState extends State<SignUp> {
                                     keyboardType: TextInputType.visiblePassword,
                                     obscureText: true,
                                     obscuringCharacter: "*",
-                                    controller: _confirmPasswordController,
+                                    controller: user.confirm,
                                     validator: (value) {
                                       if (value.isEmpty) {
                                         return "Password field can't be empty";
                                       } else if (value.length < 6) {
                                         return "Password needs to be atleast 6 characters long";
-                                      } else if (_confirmPasswordController
-                                              .text !=
-                                          value) {
+                                      } else if (user.confirm.text != value) {
                                         return "Passwords don't match";
                                       }
                                       return null;
@@ -230,14 +227,14 @@ class _SignUpState extends State<SignUp> {
                                 child: MaterialButton(
                                   onPressed: () async {
                                     if (_formKey.currentState.validate()) {
-                                      if (!await user.signUp(
-                                          _nameTextController.text,
-                                          _emailTextController.text,
-                                          _passwordTextController.text))
+                                      if (!await user.signUp()) {
                                         // ignore: deprecated_member_use
                                         _key.currentState.showSnackBar(SnackBar(
                                             content: Text('Signed Up Failed')));
+                                      }
                                     }
+                                    user.clearController();
+                                    changeScreenReplacement(context, LogIn());
                                   },
                                   minWidth: MediaQuery.of(context).size.width,
                                   child: Text(

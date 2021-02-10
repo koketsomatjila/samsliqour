@@ -10,7 +10,7 @@ class HorizontalList extends StatelessWidget {
         children: [
           Category(
               imageLocation: 'images/categories/beers.png',
-              imageCaption: '\nBeers & Ciders'),
+              imageCaption: '\nBeers/Ciders'),
           Category(
               imageLocation: 'images/categories/spiritss.png',
               imageCaption: '\nSpirits'),

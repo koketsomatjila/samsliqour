@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sams_liqour/Pages/Home.dart';
 import 'package:sams_liqour/Pages/Log%20In.dart';
 import 'package:sams_liqour/Pages/Splash.dart';
+import 'package:sams_liqour/Provider/Product%20Provider.dart';
 import 'package:sams_liqour/Provider/User%20Provider.dart';
 import './Pages/Log In.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,8 +12,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(ChangeNotifierProvider(
-    create: (_) => UserProvider.initialize(),
+  runApp(MultiProvider(
+    providers: [
+      // ChangeNotifierProvider.value(value: AppProvider()),
+      ChangeNotifierProvider.value(value: UserProvider.initialize()),
+      // ChangeNotifierProvider.value(value: CategoryProvider.initialize()),
+      ChangeNotifierProvider.value(value: ProductProvider.initialize()),
+    ],
     child: MaterialApp(
       home: ScreensController(),
     ),

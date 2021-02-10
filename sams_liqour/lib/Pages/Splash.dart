@@ -9,10 +9,17 @@ class Splash extends StatelessWidget {
         fit: BoxFit.fill,
         height: double.infinity,
         width: double.infinity,
-        color: Colors.deepOrange.withOpacity(0.4),
-        colorBlendMode: BlendMode.multiply,
+        color: Colors.black.withOpacity(0.7),
+        colorBlendMode: BlendMode.luminosity,
       ),
-      Center()
+      Center(
+        child: Padding(
+          padding: const EdgeInsets.all(38.0),
+          child: Image.asset(
+            'images/sams logo.jpg',
+          ),
+        ),
+      )
     ]);
   }
 }

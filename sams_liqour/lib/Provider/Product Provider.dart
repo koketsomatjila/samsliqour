@@ -6,6 +6,7 @@ import 'package:sams_liqour/Models/Product.dart';
 class ProductProvider with ChangeNotifier {
   List<ProductModel> products = [];
   List<ProductModel> productsSearched = [];
+  List<ProductModel> productsByCategory = [];
   ProductsServices _productsServices = ProductsServices();
 
   ProductProvider.initialize() {
@@ -14,6 +15,12 @@ class ProductProvider with ChangeNotifier {
 
   loadProducts() async {
     products = await _productsServices.getProducts();
+    notifyListeners();
+  }
+
+  Future loadProductsByCategory({String categoryName}) async {
+    productsByCategory =
+        await _productsServices.getProductsOfCategory(category: categoryName);
     notifyListeners();
   }
 

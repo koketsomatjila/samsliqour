@@ -1,15 +1,18 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sams_liqour/Database/Users.dart';
 import 'package:sams_liqour/Models/User.dart';
+// import 'package:provider/provider.dart';
 
 enum Status { Uninitialised, Authenticated, Authenticating, Unauthenticated }
 
 class UserProvider with ChangeNotifier {
   FirebaseAuth _auth;
   User _user;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Status _status = Status.Uninitialised;
   UserServices _userServices = UserServices();
   UserModel _userModel;
@@ -18,15 +21,23 @@ class UserProvider with ChangeNotifier {
   User get user => _user;
   UserModel get userModel => _userModel;
 
+  final formkey = GlobalKey<FormState>();
+
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController name = TextEditingController();
+  TextEditingController confirm = TextEditingController();
+
   UserProvider.initialize() : _auth = FirebaseAuth.instance {
     _auth.authStateChanges().listen(_onStateChanged);
   }
 
-  Future<bool> signIn(String email, String password) async {
+  Future<bool> signIn() async {
     try {
       _status = Status.Authenticating;
       notifyListeners();
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      await _auth.signInWithEmailAndPassword(
+          email: email.text.trim(), password: password.text.trim());
       return true;
     } catch (e) {
       _status = Status.Unauthenticated;
@@ -36,18 +47,19 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  Future<bool> signUp(String name, String email, String password) async {
+  Future<bool> signUp() async {
     try {
       _status = Status.Authenticating;
       notifyListeners();
       await _auth
-          .createUserWithEmailAndPassword(email: email, password: password)
+          .createUserWithEmailAndPassword(
+              email: email.text.trim(), password: password.text.trim())
           .then((user) {
-        _userServices.createUser({
-          "name": name,
-          "email": email,
+        _firestore.collection('users').doc(user.user.uid).set({
+          "name": name.text,
+          "email": email.text,
           "uid": user.user.uid,
-          "stripeId": ''
+          // "stripeId": ''
         });
       });
       return true;
@@ -64,6 +76,18 @@ class UserProvider with ChangeNotifier {
     _status = Status.Unauthenticated;
     notifyListeners();
     return Future.delayed(Duration.zero);
+  }
+
+  void clearController() {
+    name.text = "";
+    password.text = "";
+    email.text = "";
+    confirm.text = "";
+  }
+
+  Future<void> reloadUserModel() async {
+    _userModel = await _userServices.getUserById(user.uid);
+    notifyListeners();
   }
 
   Future<void> _onStateChanged(User user) async {
