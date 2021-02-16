@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sams_liqour/Commons/Loading.dart';
 import 'package:sams_liqour/Components/OthersBought.dart';
 import 'package:sams_liqour/Components/Quantity.dart';
+import 'package:sams_liqour/Models/Product.dart';
+import 'package:sams_liqour/Provider/App.dart';
+import 'package:sams_liqour/Provider/User%20Provider.dart';
+import 'package:transparent_image/transparent_image.dart';
 import 'Home.dart';
 import 'package:sams_liqour/Pages/Shopping Cart.dart';
 
 class ProductDetails extends StatefulWidget {
-  final productDetailName;
-  final productDetailPicture;
-  final productDetailPrice;
+  final ProductModel product;
 
-  ProductDetails({
-    this.productDetailName,
-    this.productDetailPicture,
-    this.productDetailPrice,
-  });
+  const ProductDetails({Key key, this.product}) : super(key: key);
+
   @override
   _ProductDetailsState createState() => _ProductDetailsState();
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
+  final _key = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
+      key: _key,
       appBar: AppBar(
         toolbarHeight: 130,
         flexibleSpace: Image(
@@ -63,112 +68,138 @@ class _ProductDetailsState extends State<ProductDetails> {
 
       // body
 
-      body: ListView(
-        children: [
-          Container(
-            height: 500,
-            child: GridTile(
-              child: Container(
-                child: Image.asset(widget.productDetailPicture),
-              ),
-              footer: Container(
-                height: 35,
-                child: ListTile(
-                  title: Column(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          widget.productDetailName,
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          widget.productDetailPrice,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.red),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+      body: ListView(children: [
+        Container(
+          height: 300,
+          child: GridTile(
+            child: Container(
+              child: FadeInImage.memoryNetwork(
+                placeholder: kTransparentImage,
+                image: widget.product.picture,
+                height: 50,
+                width: 50,
+                fit: BoxFit.fitWidth,
               ),
             ),
           ),
+        ),
 
-          // buttons
-
-          Padding(
-            padding: const EdgeInsets.only(top: 28.0),
+        // buttons
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            height: 50,
+            child: ListTile(
+                title: Column(children: [
+              Expanded(
+                child: Text(
+                  widget.product.name,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  'R${widget.product.price}',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                      fontSize: 20),
+                ),
+              )
+            ])),
+          ),
+        ),
+        Container(
+          // decoration: BoxDecoration(boxShadow: [
+          //   BoxShadow(
+          //       color: Colors.black.withOpacity(0.2), offset: Offset(3, 2))
+          // ]),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
             child: Row(
               children: [
                 Expanded(
-                  child: MaterialButton(
-                    onPressed: () {
-                      showDialog(context: null);
-                    },
-                    color: Colors.grey[100],
-                    textColor: Colors.grey,
-                    elevation: 1,
-                    child: Row(
-                      children: [
-                        Expanded(
-                            child: Text(
-                          'Quantity',
-                          textAlign: TextAlign.center,
-                        )),
-                        Container(
-                          height: 50,
-                          width: 100,
-                          child: Quantity(),
-                        )
-                      ],
-                    ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Text(
+                        'Quantity',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      )),
+                      Container(
+                        height: 50,
+                        width: 100,
+                        child: Quantity(),
+                      )
+                    ],
                   ),
                 ),
               ],
             ),
           ),
+        ),
 
-          Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: MaterialButton(
-                    onPressed: () {},
-                    color: Colors.grey[800],
-                    textColor: Colors.white,
-                    elevation: 1,
-                    child: Text('Add To Cart'),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 8.0, left: 5),
-                child: IconButton(
-                  icon: Icon(Icons.favorite_border_rounded, size: 30),
+        Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: MaterialButton(
+                  onPressed: () async {
+                    appProvider.changeIsLoading();
+                    bool success = await userProvider.addToCart(
+                      product: widget.product,
+                    );
+                    if (success) {
+                      // ignore: deprecated_member_use
+                      _key.currentState.showSnackBar(
+                          SnackBar(content: Text("Added to Cart!")));
+                      userProvider.reloadUserModel();
+                      appProvider.changeIsLoading();
+                      return;
+                    } else {
+                      // ignore: deprecated_member_use
+                      _key.currentState.showSnackBar(
+                          SnackBar(content: Text("NOT added to Cart!")));
+
+                      appProvider.changeIsLoading();
+                      return;
+                    }
+                  },
                   color: Colors.grey[800],
-                  onPressed: () {},
+                  textColor: Colors.white,
+                  elevation: 1,
+                  child:
+                      appProvider.isLoading ? Loading() : Text('Add To Cart'),
                 ),
               ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 28.0, top: 48),
-            child: Text('Others also bought',
-                style: TextStyle(fontWeight: FontWeight.w800)),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.all(28.0),
-            child: Container(
-              height: 380,
-              child: OthersBought(),
             ),
-          ),
-        ],
-      ),
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0, left: 5),
+              child: IconButton(
+                icon: Icon(Icons.favorite_border_rounded, size: 30),
+                color: Colors.grey[800],
+                onPressed: () {},
+              ),
+            ),
+          ],
+        ),
+        // Padding(
+        //   padding: const EdgeInsets.only(left: 28.0, top: 48),
+        //   child: Text('Others also bought',
+        //       style: TextStyle(fontWeight: FontWeight.w800)),
+        // ),
+
+        // Padding(
+        //   padding: const EdgeInsets.all(28.0),
+        //   child: Container(
+        //     height: 380,
+        //     child: OthersBought(),
+        //   ),
+        // ),
+      ]),
     );
   }
 }

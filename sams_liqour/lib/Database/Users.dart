@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sams_liqour/Models/Cart%20Item.dart';
+import 'package:sams_liqour/Models/Product.dart';
 import 'package:sams_liqour/Models/User.dart';
+import 'package:uuid/uuid.dart';
 
 class UserServices {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -19,4 +22,20 @@ class UserServices {
       .doc(uid)
       .get()
       .then((doc) => UserModel.fromSnapshot(doc));
+
+  void addToCart({String userId, CartItemModel cartItem}) {
+    print("THE USER ID IS: $userId");
+    print("cart items are: ${cartItem.toString()}");
+    _firestore.collection(collection).doc(userId).update({
+      "cart": FieldValue.arrayUnion([cartItem.toMap()])
+    });
+  }
+
+  void removeFromCart({String userId, CartItemModel cartItem}) {
+    print("THE USER ID IS: $userId");
+    print("cart items are: ${cartItem.toString()}");
+    _firestore.collection(collection).doc(userId).update({
+      "cart": FieldValue.arrayRemove([cartItem.toMap()])
+    });
+  }
 }

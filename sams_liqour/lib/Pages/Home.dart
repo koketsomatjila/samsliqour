@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:provider/provider.dart';
+import 'package:sams_liqour/Commons/Common.dart';
 import 'package:sams_liqour/Components/Horizontal List.dart';
 import 'package:sams_liqour/Components/Popular%20Products.dart';
+import 'package:sams_liqour/Models/Product.dart';
+import 'package:sams_liqour/Pages/Product%20Details.dart';
 // import 'package:sams_liqour/Components/Products.dart';
 import 'package:sams_liqour/Pages/Shopping Cart.dart';
+import 'package:sams_liqour/Pages/order.dart';
 import 'package:sams_liqour/Provider/Product%20Provider.dart';
 import 'package:sams_liqour/Provider/User%20Provider.dart';
 
@@ -15,14 +19,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final key = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final productProvider = Provider.of<ProductProvider>(context);
 
     Widget imageCarousel = Container(
-      height: 150.0,
+      height: 170.0,
       child: Carousel(
         boxFit: BoxFit.contain,
         images: [
@@ -32,7 +35,7 @@ class _HomePageState extends State<HomePage> {
         ],
         autoplay: true,
         animationCurve: Curves.easeInOutCirc,
-        animationDuration: Duration(milliseconds: 1000),
+        animationDuration: Duration(milliseconds: 2000),
         dotColor: Colors.yellow,
         dotSize: 5,
         indicatorBgPadding: 3,
@@ -109,7 +112,15 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () async {
+                await userProvider.getOrders();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => OrdersScreen(),
+                  ),
+                );
+              },
               child: ListTile(
                 title: Text('My Orders'),
                 leading: Icon(Icons.shopping_cart_rounded),
@@ -167,37 +178,130 @@ class _HomePageState extends State<HomePage> {
 
       // body
 
-      body: Column(
+      body: Stack(
         children: [
-          imageCarousel,
-          Padding(
-            padding: EdgeInsets.only(top: 15, bottom: 20),
-            child: Text('Categories'),
-          ),
+          Container(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  imageCarousel,
+                  Padding(
+                    padding: EdgeInsets.only(top: 15, bottom: 20),
+                    child: Text('Categories'),
+                  ),
 
-          //horizontal list starts here
-
-          HorizontalList(),
-
-          //padding
-
-          Padding(
-            padding: EdgeInsets.only(top: 5, bottom: 15),
-            child: Text('Popular Items'),
-          ),
-
-          //popular items grid
-
-          Padding(
-            padding: const EdgeInsets.fromLTRB(5, 1, 5, 50),
-            child: Column(
-                children: productProvider.products
-                    .map((item) => GestureDetector(
-                          child: ProductCard(
-                            product: item,
+                  //horizontal list starts here
+                  SizedBox(
+                    height: 100,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(1),
+                          child: InkWell(
+                            onTap: () {},
+                            child: Container(
+                              alignment: Alignment.center,
+                              width: 130,
+                              child: ListTile(
+                                title: Image.asset(
+                                  'images/categories/beers.png',
+                                  height: 50,
+                                ),
+                                subtitle: Container(
+                                  alignment: Alignment.topCenter,
+                                  child: Text('\nBeers/Ciders'),
+                                ),
+                              ),
+                            ),
                           ),
-                        ))
-                    .toList()),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(1),
+                          child: InkWell(
+                            onTap: () {},
+                            child: Container(
+                              alignment: Alignment.center,
+                              width: 130,
+                              child: ListTile(
+                                title: Image.asset(
+                                  'images/categories/spiritss.png',
+                                  height: 50,
+                                ),
+                                subtitle: Container(
+                                  alignment: Alignment.topCenter,
+                                  child: Text('\nSpirits'),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(1),
+                          child: InkWell(
+                            onTap: () {},
+                            child: Container(
+                              alignment: Alignment.center,
+                              width: 130,
+                              child: ListTile(
+                                title: Image.asset(
+                                  'images/categories/winess.png',
+                                  height: 50,
+                                ),
+                                subtitle: Container(
+                                  alignment: Alignment.topCenter,
+                                  child: Text('\nWines'),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(1),
+                          child: InkWell(
+                            onTap: () {},
+                            child: Container(
+                              alignment: Alignment.center,
+                              width: 130,
+                              child: ListTile(
+                                title: Image.asset(
+                                  'images/categories/juice.png',
+                                  height: 50,
+                                ),
+                                subtitle: Container(
+                                  alignment: Alignment.topCenter,
+                                  child: Text('\nSoft Drinks'),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // HorizontalList(),
+
+                  //padding
+
+                  Padding(
+                    padding: EdgeInsets.only(top: 35, bottom: 15),
+                    child: Text('Popular Items'),
+                  ),
+
+                  //popular items grid
+
+                  Column(
+                      children: productProvider.products
+                          .map((item) => GestureDetector(
+                                child: PopularProduct(
+                                  product: item,
+                                ),
+                              ))
+                          .toList()),
+                ],
+              ),
+            ),
           ),
         ],
       ),

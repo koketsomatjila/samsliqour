@@ -4,24 +4,21 @@ import 'package:flutter/material.dart';
 class HorizontalList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: [
-          Category(
-              imageLocation: 'images/categories/beers.png',
-              imageCaption: '\nBeers/Ciders'),
-          Category(
-              imageLocation: 'images/categories/spiritss.png',
-              imageCaption: '\nSpirits'),
-          Category(
-              imageLocation: 'images/categories/winess.png',
-              imageCaption: '\nWines'),
-          Category(
-              imageLocation: 'images/categories/juice.png',
-              imageCaption: '\nSoft Drinks'),
-        ],
-      ),
+    return Row(
+      children: [
+        Category(
+            imageLocation: 'images/categories/beers.png',
+            imageCaption: '\nBeers/Ciders'),
+        Category(
+            imageLocation: 'images/categories/spiritss.png',
+            imageCaption: '\nSpirits'),
+        Category(
+            imageLocation: 'images/categories/winess.png',
+            imageCaption: '\nWines'),
+        Category(
+            imageLocation: 'images/categories/juice.png',
+            imageCaption: '\nSoft Drinks'),
+      ],
     );
   }
 }
@@ -42,9 +39,13 @@ class Category extends StatelessWidget {
       child: InkWell(
         onTap: () {},
         child: Container(
+          alignment: Alignment.center,
           width: 130,
           child: ListTile(
-            title: Image.asset(imageLocation, width: 50, height: 50),
+            title: Image.asset(
+              imageLocation,
+              height: 50,
+            ),
             subtitle: Container(
               alignment: Alignment.topCenter,
               child: Text(imageCaption),

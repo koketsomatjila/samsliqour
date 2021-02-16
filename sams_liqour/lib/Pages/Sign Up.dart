@@ -16,7 +16,6 @@ class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   final _key = GlobalKey<ScaffoldState>();
   // UserServices _userServices = UserServices();
-  TextEditingController _confirmPasswordController = TextEditingController();
   UserCredential displayName;
   Map value;
 

@@ -1,4 +1,12 @@
+import 'dart:ui';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sams_liqour/Database/order.dart';
+import 'package:sams_liqour/Models/Product.dart';
+import 'package:sams_liqour/Provider/App.dart';
+import 'package:sams_liqour/Provider/User%20Provider.dart';
 
 class CartProducts extends StatefulWidget {
   @override
@@ -6,67 +14,59 @@ class CartProducts extends StatefulWidget {
 }
 
 class _CartProductsState extends State<CartProducts> {
-  var productsInCart = [
-    {
-      "name": "Hennessy VSOP 750ml",
-      "picture": "images/products/spirits/Hennessy.png",
-      "price": "R450",
-      "quantity": 2,
-    },
-    {
-      "name": "Heineken 340ml",
-      "picture": "images/products/beers/heineken.jpg",
-      "price": "R10",
-      "quantity": 12,
-    },
-  ];
-
+  final _key = GlobalKey<ScaffoldState>();
+  OrderServices _orderServices = OrderServices();
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context);
+    final app = Provider.of<AppProvider>(context);
     return ListView.builder(
-        itemCount: productsInCart.length,
-        itemBuilder: (context, index) {
-          return SingleCartProduct(
-            cartProdName: productsInCart[index]["name"],
-            cartProdPic: productsInCart[index]["picture"],
-            cartProdPrice: productsInCart[index]["price"],
-            cartProdQty: productsInCart[index]["quantity"],
+        itemCount: user.userModel.cart.length,
+        itemBuilder: (_, index) {
+          return Card(
+            child: ListTile(
+              trailing: IconButton(
+                  icon: Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                  ),
+                  onPressed: () async {
+                    // app.changeIsLoading();
+                    bool value = await user.removeFromCart(
+                        cartItem: user.userModel.cart[index]);
+                    if (value) {
+                      user.reloadUserModel();
+                      print("Item added to cart");
+                      // ignore: deprecated_member_use
+                      _key.currentState.showSnackBar(
+                          SnackBar(content: Text("Removed from Cart!")));
+
+                      return;
+                    } else {
+                      print("ITEM WAS NOT REMOVED");
+                    }
+                  }),
+              leading: Image.network(user.userModel.cart[index].picture),
+              title: Text(
+                user.userModel.cart[index].name,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+              ),
+              subtitle: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 0, top: 14),
+                    child: Text('R${user.userModel.cart[index].price}',
+                        style: TextStyle(
+                            color: Colors.red, fontWeight: FontWeight.bold)),
+                  )
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: (cartProdQty),
+                  // ),
+                ],
+              ),
+            ),
           );
         });
-  }
-}
-
-class SingleCartProduct extends StatelessWidget {
-  final cartProdName;
-  final cartProdPic;
-  final cartProdPrice;
-  final cartProdQty;
-
-  SingleCartProduct({
-    this.cartProdName,
-    this.cartProdPic,
-    this.cartProdPrice,
-    this.cartProdQty,
-  });
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        leading: Image.asset(cartProdPic),
-        title: Text(cartProdName),
-        subtitle: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 0, top: 14),
-              child: Text(cartProdPrice),
-            ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: (cartProdQty),
-            // ),
-          ],
-        ),
-      ),
-    );
   }
 }
