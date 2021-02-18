@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sams_liqour/Commons/Loading.dart';
-import 'package:sams_liqour/Components/OthersBought.dart';
 import 'package:sams_liqour/Components/Quantity.dart';
 import 'package:sams_liqour/Models/Product.dart';
 import 'package:sams_liqour/Provider/App.dart';
@@ -78,7 +77,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 image: widget.product.picture,
                 height: 50,
                 width: 50,
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.fitHeight,
               ),
             ),
           ),

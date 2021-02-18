@@ -12,7 +12,7 @@ class _QuantityState extends State<Quantity> {
   @override
   void initState() {
     super.initState();
-    _controller.text = "0";
+    _controller.text = "1";
   }
 
   @override

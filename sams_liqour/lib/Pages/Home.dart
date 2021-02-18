@@ -5,9 +5,15 @@ import 'package:sams_liqour/Commons/Common.dart';
 import 'package:sams_liqour/Components/Horizontal List.dart';
 import 'package:sams_liqour/Components/Popular%20Products.dart';
 import 'package:sams_liqour/Models/Product.dart';
+import 'package:sams_liqour/Pages/Beers.dart';
+import 'package:sams_liqour/Pages/Categories.dart';
 import 'package:sams_liqour/Pages/Product%20Details.dart';
+import 'package:sams_liqour/Pages/Search.dart';
 // import 'package:sams_liqour/Components/Products.dart';
 import 'package:sams_liqour/Pages/Shopping Cart.dart';
+import 'package:sams_liqour/Pages/Soft%20Drinks.dart';
+import 'package:sams_liqour/Pages/Spirits.dart';
+import 'package:sams_liqour/Pages/Wines.dart';
 import 'package:sams_liqour/Pages/order.dart';
 import 'package:sams_liqour/Provider/Product%20Provider.dart';
 import 'package:sams_liqour/Provider/User%20Provider.dart';
@@ -69,7 +75,10 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           IconButton(
-              icon: Icon(Icons.search, color: Colors.white), onPressed: null),
+              icon: Icon(Icons.search, color: Colors.white),
+              onPressed: () {
+                changeScreenReplacement(context, SearchPage());
+              }),
           IconButton(
               icon: Icon(Icons.shopping_bag, color: Colors.white),
               onPressed: () {
@@ -87,8 +96,8 @@ class _HomePageState extends State<HomePage> {
           children: [
 //           start of the header
             UserAccountsDrawerHeader(
-              accountName: Text('Koketso'),
-              accountEmail: Text('ktmatjila@gmail.com'),
+              accountName: Text(userProvider.userModel.name),
+              accountEmail: Text(userProvider.userModel.email),
               currentAccountPicture: GestureDetector(
                 child: Image(
                   image: AssetImage('images/kk.jpg'),
@@ -97,18 +106,35 @@ class _HomePageState extends State<HomePage> {
               decoration: BoxDecoration(color: Colors.brown),
             ),
 // start of the body
+            // InkWell(
+            //   onTap: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => HomePage(),
+            //       ),
+            //     );
+            //   },
+            //   child: ListTile(
+            //     title: Text('Home Page'),
+            //     leading: Icon(Icons.home),
+            //   ),
+            // ),
+            // InkWell(
+            //   onTap: () {},
+            //   child: ListTile(
+            //     title: Text('My Account'),
+            //     leading: Icon(Icons.person),
+            //   ),
+            // ),
+
             InkWell(
-              onTap: () {},
+              onTap: () {
+                changeScreen(context, Categories());
+              },
               child: ListTile(
-                title: Text('Home Page'),
-                leading: Icon(Icons.home),
-              ),
-            ),
-            InkWell(
-              onTap: () {},
-              child: ListTile(
-                title: Text('My Account'),
-                leading: Icon(Icons.person),
+                title: Text('Categories'),
+                leading: Icon(Icons.dashboard_rounded),
               ),
             ),
             InkWell(
@@ -129,13 +155,6 @@ class _HomePageState extends State<HomePage> {
             InkWell(
               onTap: () {},
               child: ListTile(
-                title: Text('Categories'),
-                leading: Icon(Icons.dashboard_rounded),
-              ),
-            ),
-            InkWell(
-              onTap: () {},
-              child: ListTile(
                 title: Text('Wishlist'),
                 leading: Icon(Icons.favorite_border_rounded),
               ),
@@ -145,13 +164,6 @@ class _HomePageState extends State<HomePage> {
               height: 57,
             ),
 
-            InkWell(
-              onTap: () {},
-              child: ListTile(
-                title: Text('Settings'),
-                leading: Icon(Icons.settings_applications_rounded),
-              ),
-            ),
             InkWell(
               onTap: () {},
               child: ListTile(
@@ -199,7 +211,9 @@ class _HomePageState extends State<HomePage> {
                         Padding(
                           padding: EdgeInsets.all(1),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              changeScreen(context, Beers());
+                            },
                             child: Container(
                               alignment: Alignment.center,
                               width: 130,
@@ -219,7 +233,9 @@ class _HomePageState extends State<HomePage> {
                         Padding(
                           padding: EdgeInsets.all(1),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              changeScreen(context, Spirits());
+                            },
                             child: Container(
                               alignment: Alignment.center,
                               width: 130,
@@ -239,7 +255,9 @@ class _HomePageState extends State<HomePage> {
                         Padding(
                           padding: EdgeInsets.all(1),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              changeScreen(context, Wines());
+                            },
                             child: Container(
                               alignment: Alignment.center,
                               width: 130,
@@ -259,7 +277,9 @@ class _HomePageState extends State<HomePage> {
                         Padding(
                           padding: EdgeInsets.all(1),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              changeScreen(context, SoftDrinks());
+                            },
                             child: Container(
                               alignment: Alignment.center,
                               width: 130,
@@ -292,7 +312,7 @@ class _HomePageState extends State<HomePage> {
                   //popular items grid
 
                   Column(
-                      children: productProvider.products
+                      children: productProvider.featuredProducts
                           .map((item) => GestureDetector(
                                 child: PopularProduct(
                                   product: item,

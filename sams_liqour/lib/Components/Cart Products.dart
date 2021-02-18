@@ -1,10 +1,8 @@
 import 'dart:ui';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sams_liqour/Database/order.dart';
-import 'package:sams_liqour/Models/Product.dart';
 import 'package:sams_liqour/Provider/App.dart';
 import 'package:sams_liqour/Provider/User%20Provider.dart';
 
@@ -55,14 +53,18 @@ class _CartProductsState extends State<CartProducts> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 0, top: 14),
-                    child: Text('R${user.userModel.cart[index].price}',
+                    child: Text(
+                        'R${user.userModel.cart[index].price}\t\t\t\t\t\t\t\t\t',
                         style: TextStyle(
-                            color: Colors.red, fontWeight: FontWeight.bold)),
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 0, top: 14),
+                    child: Text('Qty : ${user.userModel.cart[index].quantity}',
+                        style: TextStyle(color: Colors.grey)),
                   )
-                  // Padding(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child: (cartProdQty),
-                  // ),
                 ],
               ),
             ),

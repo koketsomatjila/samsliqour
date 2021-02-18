@@ -4,12 +4,12 @@ import 'package:sams_liqour/Components/Popular%20Products.dart';
 import 'package:sams_liqour/Provider/Product%20Provider.dart';
 import 'Home.dart';
 
-class Beers extends StatefulWidget {
+class Spirits extends StatefulWidget {
   @override
-  _BeersState createState() => _BeersState();
+  _SpiritsState createState() => _SpiritsState();
 }
 
-class _BeersState extends State<Beers> {
+class _SpiritsState extends State<Spirits> {
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
@@ -49,10 +49,10 @@ class _BeersState extends State<Beers> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 20, bottom: 20),
+              padding: const EdgeInsets.only(top: 20),
               child: Container(
                 child: Text(
-                  'Beers and Ciders',
+                  'Spirits',
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w500,
@@ -60,10 +60,12 @@ class _BeersState extends State<Beers> {
                   ),
                   textAlign: TextAlign.center,
                 ),
+                width: 300,
+                height: 50,
               ),
             ),
             Column(
-                children: productProvider.productsByCategory
+                children: productProvider.productsByCategory1
                     .map((item) => GestureDetector(
                           child: PopularProduct(
                             product: item,

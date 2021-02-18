@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/cupertino_flutter_typeahead.dart';
 import 'package:provider/provider.dart';
 import 'package:sams_liqour/Database/order.dart';
 import 'package:sams_liqour/Models/Cart%20Item.dart';
-import 'package:sams_liqour/Pages/order.dart';
 import 'package:sams_liqour/Provider/App.dart';
 import 'package:sams_liqour/Provider/User%20Provider.dart';
 import 'package:uuid/uuid.dart';
@@ -132,7 +132,7 @@ class _CartState extends State<Cart> {
                                               MainAxisAlignment.center,
                                           children: <Widget>[
                                             Text(
-                                              'Your cart is emty',
+                                              'Your cart is empty',
                                               textAlign: TextAlign.center,
                                             ),
                                           ],
@@ -180,11 +180,14 @@ class _CartState extends State<Cart> {
                                                 totalPrice: user
                                                     .userModel.totalCartPrice,
                                                 cart: user.userModel.cart);
+
                                             for (CartItemModel cartItem
                                                 in user.userModel.cart) {
                                               bool value =
                                                   await user.removeFromCart(
-                                                      cartItem: cartItem);
+                                                      cartItem: user
+                                                          .userModel.cart[0]);
+
                                               if (value) {
                                                 user.reloadUserModel();
                                                 print("Item added to cart");

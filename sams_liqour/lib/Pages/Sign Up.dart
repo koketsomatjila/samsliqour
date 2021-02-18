@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sams_liqour/Commons/Common.dart';
 import 'package:sams_liqour/Commons/Loading.dart';
-import 'package:sams_liqour/Pages/Home.dart';
 import 'package:sams_liqour/Pages/Log%20In.dart';
 import 'package:sams_liqour/Provider/User%20Provider.dart';
 

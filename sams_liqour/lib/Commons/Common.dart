@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void changeScreeen(BuildContext context, Widget widget) {
+void changeScreen(BuildContext context, Widget widget) {
   Navigator.push(context, MaterialPageRoute(builder: (context) => widget));
 }
 

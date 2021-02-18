@@ -35,7 +35,55 @@ class ProductsServices {
   Future<List<ProductModel>> getProductsOfCategory({String category}) async =>
       _firestore
           .collection(collection)
-          .where("category", isEqualTo: category)
+          .where("Category", isEqualTo: 'Beers')
+          .get()
+          .then((result) {
+        List<ProductModel> products = [];
+        for (DocumentSnapshot product in result.docs) {
+          products.add(ProductModel.fromSnapshot(product));
+        }
+        return products;
+      });
+  Future<List<ProductModel>> getProductsOfCategory1({String category}) async =>
+      _firestore
+          .collection(collection)
+          .where("Category", isEqualTo: 'Spirits')
+          .get()
+          .then((result) {
+        List<ProductModel> products = [];
+        for (DocumentSnapshot product in result.docs) {
+          products.add(ProductModel.fromSnapshot(product));
+        }
+        return products;
+      });
+  Future<List<ProductModel>> getProductsOfCategory2({String category}) async =>
+      _firestore
+          .collection(collection)
+          .where("Category", isEqualTo: 'Wines')
+          .get()
+          .then((result) {
+        List<ProductModel> products = [];
+        for (DocumentSnapshot product in result.docs) {
+          products.add(ProductModel.fromSnapshot(product));
+        }
+        return products;
+      });
+  Future<List<ProductModel>> getProductsOfCategory3({String category}) async =>
+      _firestore
+          .collection(collection)
+          .where("Category", isEqualTo: 'Soft Drinks')
+          .get()
+          .then((result) {
+        List<ProductModel> products = [];
+        for (DocumentSnapshot product in result.docs) {
+          products.add(ProductModel.fromSnapshot(product));
+        }
+        return products;
+      });
+  Future<List<ProductModel>> getFeaturedProducts({String featured}) async =>
+      _firestore
+          .collection(collection)
+          .where("Featured", isEqualTo: true)
           .get()
           .then((result) {
         List<ProductModel> products = [];

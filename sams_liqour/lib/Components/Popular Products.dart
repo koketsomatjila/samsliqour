@@ -28,7 +28,7 @@ class PopularProduct extends StatelessWidget {
             ]),
         child: InkWell(
           onTap: () {
-            changeScreenReplacement(
+            changeScreen(
                 context,
                 ProductDetails(
                   product: product,
@@ -37,10 +37,6 @@ class PopularProduct extends StatelessWidget {
           child: Row(
             children: <Widget>[
               _productImage(product.picture),
-
-              // SizedBox(
-              //   width: 30,
-              // ),
               RichText(
                 text: TextSpan(children: [
                   TextSpan(
@@ -48,19 +44,12 @@ class PopularProduct extends StatelessWidget {
                     style: TextStyle(fontSize: 20),
                   ),
                   TextSpan(
-                    text: 'R${product.price} \t',
+                    text: 'R${product.price} \t\t',
                     style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.red),
                   ),
-                  // TextSpan(
-                  //   text: 'HOT RIGHT NOW',
-                  //   style: TextStyle(
-                  //       fontSize: 18,
-                  //       fontWeight: FontWeight.w400,
-                  //       color: Colors.red),
-                  // ),
                 ], style: TextStyle(color: Colors.black)),
               )
             ],
