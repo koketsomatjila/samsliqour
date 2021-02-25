@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:provider/provider.dart';
@@ -77,7 +78,8 @@ class _HomePageState extends State<HomePage> {
           IconButton(
               icon: Icon(Icons.search, color: Colors.white),
               onPressed: () {
-                changeScreenReplacement(context, SearchPage());
+                changeScreen(context, SearchPage());
+                // showSearch(context: context, delegate: DataSearch());
               }),
           IconButton(
               icon: Icon(Icons.shopping_bag, color: Colors.white),
@@ -328,3 +330,55 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+// class DataSearch extends SearchDelegate<String> {
+//   @override
+//   List<Widget> buildActions(BuildContext context) {
+//     return [
+//       IconButton(
+//           icon: Icon(Icons.clear),
+//           onPressed: () {
+//             query = '';
+//           })
+//     ];
+//   }
+
+//   @override
+//   Widget buildLeading(BuildContext context) {
+//     return IconButton(
+//         icon: AnimatedIcon(
+//             icon: AnimatedIcons.menu_arrow, progress: transitionAnimation),
+//         onPressed: () {
+//           close(context, null);
+//         });
+//   }
+
+//   @override
+//   Widget buildResults(BuildContext context) {
+//     // TODO: implement buildResults
+//   }
+
+//   @override
+//   Widget buildSuggestions(BuildContext context) {
+//     return StreamBuilder(
+//         stream: FirebaseFirestore.instance.collection('products').snapshots(),
+//         builder: (context, snapshot) {
+//           if (!snapshot.hasData) {
+//             return Center(
+//               child: Text('No Data'),
+//             );
+//           }
+//           return Center(
+//               child: Row(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: <Widget>[
+//               Icon(Icons.search),
+//               Text(
+//                 'No Data Found',
+//                 textAlign: TextAlign.center,
+//               ),
+//             ],
+//           ));
+//         });
+//   }
+// }

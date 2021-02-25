@@ -4,7 +4,12 @@ import 'package:provider/provider.dart';
 import 'package:sams_liqour/Models/order.dart';
 import 'package:sams_liqour/Provider/User%20Provider.dart';
 
-class OrdersScreen extends StatelessWidget {
+class OrdersScreen extends StatefulWidget {
+  @override
+  _OrdersScreenState createState() => _OrdersScreenState();
+}
+
+class _OrdersScreenState extends State<OrdersScreen> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context);
@@ -36,6 +41,14 @@ class OrdersScreen extends StatelessWidget {
               trailing: Text(_order.status),
             );
           }),
+      bottomNavigationBar: FlatButton(
+        child: Text('Clear Orders List'),
+        color: Colors.red,
+        textColor: Colors.white,
+        onPressed: () {
+          setState(() {});
+        },
+      ),
     );
   }
 }
